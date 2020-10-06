@@ -16,7 +16,7 @@ const Home = () => {
         <PostCardLoading />
       </Container>
     );
-  if (error) return `Error! ${error.message}`;
+  if (error) return <p>Error! ${error.message}</p>;
   const { posts } = data;
   const fetchMoreData = () => {
     const { endCursor } = posts.pageInfo;
@@ -47,6 +47,3 @@ const Home = () => {
   );
 };
 export default Home;
-// postslist.map((post, index) => {
-//     return <Post key={index} post={post} />;
-// })

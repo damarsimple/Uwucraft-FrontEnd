@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
+import { Container, createStyles, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import Iteminformation from "./ItemInformation";
 import Itemdescription from "./ItemDescription";
@@ -26,8 +26,8 @@ const ItemLookup = (props: any) => {
   useEffect(() => {
     increaseViewCount(props.match.params.itemid).then();
   }, [props.match.params.itemid]);
-  if (loading) return "Loading";
-  if (error) return `Error! ${error.message}`;
+  if (loading) return <p>Loading</p>;
+  if (error) return <p>Error! ${error.message}</p>;
   const item: Item = data.item;
   return (
     <Container maxWidth="lg">

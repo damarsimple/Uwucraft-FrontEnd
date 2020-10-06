@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Theme from "./components/Ui/Theme";
 import Box from "@material-ui/core/Box";
@@ -28,7 +28,7 @@ import Checkout from "./components/Shop/Checkout";
 const App = () => {
   const [session, setSession] = useState<IUserContext>({ isLogged: false });
   const [carts, setCarts] = useState<Array<Usercart | null>>([]);
-  const { loading, data, error, refetch } = useQuery(GET_ME, {
+  const { loading, data, refetch } = useQuery(GET_ME, {
     client: client,
   });
   useEffect(() => {
@@ -43,13 +43,16 @@ const App = () => {
       setCarts(data.me.usercart as Usercart[]);
     }
   };
-  const destroySession = () => {
+  const destroySession = useCallback(() => {
     setSession({ isLogged: false });
     localStorage.removeItem("token");
-  };
-  const refetchCarts = () => {
+    return true;
+  }, []);
+
+  const refetchCarts = useCallback(() => {
     refetch();
-  };
+    return true;
+  }, [refetch]);
   const sessionData = useMemo(
     () => ({
       session,
@@ -82,7 +85,7 @@ const App = () => {
                   <Navbar />
                   {session.isLogged ? <Chat /> : null}
                   <Box mt={10}>
-                    {/* <Route path="/home" component={Home} /> */}
+                    <Route path="/home" component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route
@@ -90,10 +93,10 @@ const App = () => {
                       render={({ match: { url } }) => (
                         <>
                           <Route path={`${url}/`} component={Shop} exact />
-                          {/* <Route
+                          <Route
                             path={`${url}/item/:itemid`}
                             component={Itemlookup}
-                          /> */}
+                          />
                           <Route path={`${url}/cart`} component={Cart} />
                           <Route
                             path={`${url}/checkout`}
