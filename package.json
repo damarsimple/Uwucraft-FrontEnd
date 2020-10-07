@@ -13,10 +13,8 @@
     "@tippyjs/react": "^4.1.0",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
-    "@types/react-dom": "^16.9.0",
     "@types/react-router": "^5.1.8",
     "@types/react-swipeable-views": "^0.13.0",
-    "@types/socket.io-client": "^1.4.34",
     "apollo-client": "^2.6.10",
     "axios": "^0.20.0",
     "chart.js": "^2.9.3",
@@ -72,6 +70,8 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.51",
-    "@types/react-router-dom": "^5.1.5"
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/socket.io-client": "^1.4.34"
   }
 }
