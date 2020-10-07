@@ -17,6 +17,6 @@ export interface Context {
 
 export const UserContext = createContext<Context>({
   session: { isLogged: false },
-  carts: []
+  carts: [],
 });
 export default UserContext;
