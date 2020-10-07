@@ -3,9 +3,7 @@ import {
   InMemoryCache,
   gql,
   NormalizedCacheObject,
-  ApolloQueryResult,
   createHttpLink,
-  DefaultOptions
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
@@ -18,32 +16,32 @@ const cache = new InMemoryCache({
         tasks: {
           merge(existing = [], incoming: any[]) {
             return [...existing, ...incoming];
-          }
-        }
-      }
-    }
-  }
+          },
+        },
+      },
+    },
+  },
 });
 const httpLink = createHttpLink({
-  uri: "/graphql"
+  uri: "http://192.168.109.132/graphql",
 });
 const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : ""
-    }
+      authorization: token ? `Bearer ${token}` : "",
+    },
   };
 });
 export const client: ApolloClient<NormalizedCacheObject> = token
   ? new ApolloClient({
       link: authLink.concat(httpLink),
-      uri: "/graphql",
-      cache: cache
+      uri: "http://192.168.109.132/graphql",
+      cache: cache,
     })
   : new ApolloClient({
-      uri: "/graphql",
-      cache: cache
+      uri: "http://192.168.109.132/graphql",
+      cache: cache,
     });
 export const GET_ITEMS = gql`
     query Items($after: String, $first: Int = ${20}) {
@@ -197,7 +195,7 @@ export async function sendMessage(to_id: number, message: string) {
                     id
                 }
             }
-        `
+        `,
   });
 }
 export const GET_ME = gql`
@@ -267,7 +265,7 @@ export async function meCart(getItemProperty?: boolean) {
               }
             }
           }
-        `
+        `,
       })
     : client.query({
         query: gql`
@@ -281,7 +279,7 @@ export async function meCart(getItemProperty?: boolean) {
               }
             }
           }
-        `
+        `,
       });
 }
 interface Login {
@@ -305,7 +303,7 @@ export async function login(credentials: Login) {
                     }
                 }
             }
-        `
+        `,
   });
 }
 export async function register(
@@ -333,7 +331,7 @@ export async function register(
                     }
                 }
             }
-        `
+        `,
   });
 }
 export async function chatquery(from: number, to: number) {
@@ -350,6 +348,6 @@ export async function chatquery(from: number, to: number) {
                     message
                 }
             }
-        `
+        `,
   });
 }

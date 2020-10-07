@@ -64,6 +64,7 @@ const App = () => {
     }),
     [session, carts, setSession, setCarts, destroySession, refetchCarts]
   );
+
   const EchoClient = EchoInstance;
   const echoClient = useMemo(() => ({ EchoClient }), [EchoClient]);
   useEffect(() => {

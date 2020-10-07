@@ -5,8 +5,6 @@ import {
     Tab,
     Box,
     Typography,
-    makeStyles,
-    Theme,
     Divider
 } from "@material-ui/core";
 import SimpleLineCharts from "./SimpleLineCharts";

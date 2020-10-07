@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import {
     Button,
-    Checkbox,
     Container,
     createStyles,
     FormControl,
     FormControlLabel,
-    FormLabel,
     Grid,
     makeStyles,
     Paper,
@@ -16,7 +14,6 @@ import {
     Theme,
     Typography
 } from "@material-ui/core";
-import CartList from "./CartList";
 import { useFormik } from "formik";
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     })
 );
-const paymentType = { card: "card", ingamemoney: "ingamemoney" };
 const Checkout = () => {
     const [currentPage, setCurrentPage] = useState<
         "In Game Money" | "Credit Card" | string
@@ -90,7 +86,7 @@ const Checkout = () => {
                             />
                         </RadioGroup>
                     </FormControl>
-                    {currentPage == "In Game Money" ? (
+                    {currentPage === "In Game Money" ? (
                         <InGameMoney />
                     ) : (
                         <CreditCard />

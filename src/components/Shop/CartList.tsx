@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import {
   makeStyles,
-  Theme,
   createStyles,
   Grid,
   Paper,
@@ -9,7 +8,7 @@ import {
   Box,
   Button,
   ButtonGroup,
-  TextField
+  TextField,
 } from "@material-ui/core";
 import Image from "material-ui-image";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -19,18 +18,18 @@ const useStyles = makeStyles(() =>
   createStyles({
     imgContainer: {
       maxWidth: "100%",
-      maxHeight: "100%"
+      maxHeight: "100%",
     },
-    container: { marginBottom: "2rem", maxHeight: "100" }
+    container: { marginBottom: "2rem", maxHeight: "100" },
   })
 );
 
 const CartList = () => {
-  const { carts } = useContext(UserContext);
+  const { carts, setCarts } = useContext(UserContext);
   const HandleClick = (number: number) => {
     const pr = carts;
     pr[number]!.amount = carts[number]!.amount - 1;
-    // setCarts ? setCarts(pr) : null;
+    if (setCarts !== undefined) setCarts(pr);
   };
   const classes = useStyles();
   return (
@@ -75,7 +74,7 @@ const CartList = () => {
                       value={item?.amount}
                       inputProps={{
                         min: 0,
-                        style: { textAlign: "center" }
+                        style: { textAlign: "center" },
                       }}
                     />
                   </Grid>

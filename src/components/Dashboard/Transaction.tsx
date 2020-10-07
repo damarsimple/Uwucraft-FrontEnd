@@ -1,19 +1,13 @@
 import React from "react";
 import {
     Grid,
-    Paper,
-    CardHeader,
-    Avatar,
-    IconButton,
-    Box,
-    Typography
-} from "@material-ui/core";
+    Paper} from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 import MostPurchased from "./MostPurchased";
 import MostPurchased24HTable from "./MostPurchased24HTable";
 import SimpleLineCharts from "./SimpleLineCharts";
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     root: {
         padding: "1rem"
     },

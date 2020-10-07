@@ -1,7 +1,6 @@
 import React from "react";
 import Itemlist from "./ItemList";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Items, PaginatorInfo } from "../../type/type";
 import { GET_ITEMS } from "../../api/graphql";
 import { Container } from "@material-ui/core";
 import { useQuery } from "@apollo/client";

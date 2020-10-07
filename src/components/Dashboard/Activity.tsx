@@ -1,4 +1,5 @@
-import React, { useEffect, useContext, useState, Fragment } from "react";
+
+import React, { useContext, useState, Fragment } from "react";
 import {
   Typography,
   Divider,
@@ -7,9 +8,6 @@ import {
   Avatar,
   List,
   ListItem,
-  makeStyles,
-  createStyles,
-  Theme,
   Paper,
 } from "@material-ui/core";
 import EchoContext from "../../context/EchoContext";
@@ -38,7 +36,7 @@ interface ActivityData {
 function Activity() {
   const { EchoClient } = useContext(EchoContext);
   const [activities, setActivities] = useState<ActivityData[]>([]);
-  const { loading, data, error } = useQuery(GET_ACTIVITIES, {
+  const { loading } = useQuery(GET_ACTIVITIES, {
     variables: {
       first: 100,
       after: null,
@@ -104,25 +102,6 @@ const ActivityUser = (props: User) => {
           </Typography>
         </Grid>
       </Grid>
-    </ListItem>
-  );
-};
-const template = () => {
-  return (
-    <ListItem>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item>
-          <ButtonBase>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-          </ButtonBase>
-        </Grid>
-        <Grid item>
-          <Typography variant="body1">
-            Username has added requested to add this.item to shop
-          </Typography>
-        </Grid>
-      </Grid>
-      <Divider />
     </ListItem>
   );
 };

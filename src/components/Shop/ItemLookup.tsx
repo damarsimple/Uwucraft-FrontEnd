@@ -6,7 +6,6 @@ import Itemdescription from "./ItemDescription";
 import { GET_ITEM } from "../../api/graphql";
 import { useQuery } from "@apollo/client";
 import { Item } from "../../type/type";
-import { increaseViewCount } from "../../api/rest";
 import useBreadcrumbs from "use-react-router-breadcrumbs";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 const useStyles = makeStyles(() =>
@@ -23,9 +22,7 @@ const ItemLookup = (props: any) => {
     variables: { item_id: props.match.params.itemid },
   });
   const breadcrumbs = useBreadcrumbs();
-  useEffect(() => {
-    increaseViewCount(props.match.params.itemid).then();
-  }, [props.match.params.itemid]);
+  useEffect(() => {}, [props.match.params.itemid]);
   if (loading) return <p>Loading</p>;
   if (error) return <p>Error! ${error.message}</p>;
   const item: Item = data.item;

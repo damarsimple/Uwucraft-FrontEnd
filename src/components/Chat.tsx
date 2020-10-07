@@ -2,7 +2,6 @@ import {
     createStyles,
     makeStyles,
     Paper,
-    Theme,
     Typography,
     List,
     ListItemAvatar,
@@ -14,12 +13,12 @@ import {
     Box
 } from "@material-ui/core";
 
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import UserContext from "../context/UserContext";
 import { Friend, User } from "../type/type";
 
 import ChatContainer from "./Chat/ChatContainer";
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
         container: {
             position: "fixed",
@@ -49,7 +48,7 @@ const Chat = () => {
         }
         //dont let add friend that already active
         for (let i = 0; i < activeChat.length; i++) {
-            if (activeChat[i].friend.username == friend.friend.username) {
+            if (activeChat[i].friend.username === friend.friend.username) {
                 return;
             }
         }
@@ -60,7 +59,7 @@ const Chat = () => {
     const setActiveFriendTab = (index: number) => {
         const output: ActiveFriend[] = [];
         for (let i = 0; i < activeChat.length; i++) {
-            if (i == index) {
+            if (i === index) {
                 const base = activeChat;
                 base[i].isActive = !base[i].isActive;
                 output.push(base[i]);
@@ -73,7 +72,7 @@ const Chat = () => {
     const removeActiveFriend = (index: number) => {
         const output: ActiveFriend[] = [];
         for (let i = 0; i < activeChat.length; i++) {
-            if (i != index) {
+            if (i !== index) {
                 output.push(activeChat[i]);
             }
         }

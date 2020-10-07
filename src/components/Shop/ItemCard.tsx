@@ -4,7 +4,6 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 
 import Typography from "@material-ui/core/Typography";
 import Image from "material-ui-image";
@@ -27,14 +26,9 @@ const ItemCard = (props: { item: Item }) => {
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        {/* <CardMedia
-                    className={classes.media}
-                    image={"/api/image/item/" + item.minecraft_item_shorthand}
-                    title={item.item_name}
-                /> */}
         <Image
           className={classes.media}
-          src={"/api/image/item/" + item.minecraft_item_shorthand}
+          src={"/img/item/" + item.minecraft_item_shorthand + ".png"}
         />
       </CardActionArea>
       <CardContent>

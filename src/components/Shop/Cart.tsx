@@ -27,23 +27,23 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Cart = () => {
-  const { carts, setCarts } = useContext(UserContext);
+  const { setCarts } = useContext(UserContext);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const classes = useStyles();
   useEffect(() => {
     const setCartsData = async () => {
       const data = await meCart(true);
       if (localStorage.getItem("token")) {
-        // setCarts ? setCarts(data.data.me.usercart) : null;
-        var totalPrice = 0;
-        data.data.me.usercart.map((e: { item: Item }) => {
-          totalPrice = totalPrice + e.item.price;
+        if (setCarts !== undefined) setCarts(data.data.me.usercart);
+        let totalPrice = 0;
+        data.data.me.usercart.forEach((element: { item: Item }) => {
+          totalPrice = totalPrice + element.item.price;
         });
         setTotalPrice(totalPrice);
       }
     };
     setCartsData();
-  }, []);
+  });
   return (
     <Container maxWidth="lg">
       <Paper elevation={0} className={classes.container}>

@@ -3,7 +3,7 @@ export function getImage(id: string | number, type: string): string {
     case "User":
       return "";
     case "Item":
-      return "/api/image/item/" + id;
+      return "/img/item/" + id + ".png";
     default:
       return "";
   }

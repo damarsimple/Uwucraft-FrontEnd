@@ -1,7 +1,4 @@
 import {
-    makeStyles,
-    Theme,
-    createStyles,
     Paper,
     Grid,
     Button

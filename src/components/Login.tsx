@@ -13,7 +13,6 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 import { login } from "../api/graphql";
-import { GET_ME } from "../api/graphql";
 import { Collapse } from "@material-ui/core";
 import UserContext from "../context/UserContext";
 const useStyles = makeStyles((theme) => ({
@@ -49,17 +48,19 @@ export default function Login() {
   const handleClick = () => {
     login({ username: username, password: password })
       .then((r) => {
-        // if (r.data.login.success) {
-        //   setSession!({
-        //     isLogged: true,
-        //     session: r.data.login.user
-        //   }),
-        //     localStorage.removeItem("token"),
-        //     localStorage.setItem("token", r.data.login.token),
-        //     window.location.replace("/home");
-        // } else {
-        //   setMessage(r.data.login.exception), setStatus(true);
-        // }
+        if (r.data.login.success) {
+          if (setSession !== undefined)
+            setSession({
+              isLogged: true,
+              session: r.data.login.user,
+            });
+          localStorage.removeItem("token");
+          localStorage.setItem("token", r.data.login.token);
+          window.location.replace("/home");
+        } else {
+          setMessage(r.data.login.exception);
+          setStatus(true);
+        }
       })
       .catch(() => {
         setMessage("Server Error");

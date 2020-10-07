@@ -48,7 +48,7 @@ function ChatBox(props: ChatBoxData) {
       setChats(chats.concat(data.data.chatquery));
     };
     ChatsData();
-  }, []);
+  });
   const sort = [props.friend_id as number, session.session?.id as number];
   sort.sort((a, b) => a - b);
   EchoClient.channel(`chatmessage${sort.toString()}`).listen(

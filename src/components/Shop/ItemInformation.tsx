@@ -42,7 +42,7 @@ const ItemInformation = (props: Item) => {
               height: 400,
               marginTop: "5rem",
             }}
-            src={"/api/image/item/" + props.minecraft_item_shorthand}
+            src={"/img/item/" + props.minecraft_item_shorthand + ".png"}
           />
         </Grid>
         <Grid item xs={false} sm={8}>
