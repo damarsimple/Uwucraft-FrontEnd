@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import { Usercart, User } from "../type/type";
+import React, { createContext } from 'react'
+import { Usercart, User } from '../type/type'
 export interface IUserContext {
   session?: User;
   isLogged: boolean;
@@ -17,6 +17,6 @@ export interface Context {
 
 export const UserContext = createContext<Context>({
   session: { isLogged: false },
-  carts: [],
-});
-export default UserContext;
+  carts: []
+})
+export default UserContext

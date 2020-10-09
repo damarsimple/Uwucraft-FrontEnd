@@ -1,14 +1,15 @@
-import React from "react";
-import SwipeableViews from "react-swipeable-views";
-import { Paper, makeStyles } from "@material-ui/core";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import ItemReview from "./ItemReview";
-import { Box } from "@material-ui/core";
-import { Review } from "../../type/type";
+/* eslint-disable no-use-before-define */
+import React from 'react'
+import SwipeableViews from 'react-swipeable-views'
+import { Paper, makeStyles, Box } from '@material-ui/core'
+import AppBar from '@material-ui/core/AppBar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import ItemReview from './ItemReview'
 
-function TabPanel(props: any) {
+import { Review } from '../../type/type'
+
+function TabPanel (props: any) {
   return (
     <div
       role="tabpanel"
@@ -18,7 +19,7 @@ function TabPanel(props: any) {
     >
       {props.children}
     </div>
-  );
+  )
 }
 
 interface Description {
@@ -28,21 +29,21 @@ interface Description {
 const useStyles = makeStyles({
   container: {
     height: 1000,
-    overflow: "scroll",
-    overflowX: "hidden",
-  },
-});
+    overflow: 'scroll',
+    overflowX: 'hidden'
+  }
+})
 const ItemDescription = (props: Description) => {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const classes = useStyles()
+  const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
+    setValue(newValue)
+  }
 
   const handleChangeIndex = (index: number) => {
-    setValue(index);
-  };
+    setValue(index)
+  }
 
   return (
     <>
@@ -76,6 +77,6 @@ const ItemDescription = (props: Description) => {
         </SwipeableViews>
       </Paper>
     </>
-  );
-};
-export default ItemDescription;
+  )
+}
+export default ItemDescription

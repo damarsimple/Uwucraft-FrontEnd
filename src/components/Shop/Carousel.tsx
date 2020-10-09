@@ -1,26 +1,27 @@
-import React from "react";
-import Box from "@material-ui/core/Box";
+/* eslint-disable no-use-before-define */
+import React from 'react'
+import Box from '@material-ui/core/Box'
 // import Swiper core and required components
 import SwiperCore, {
   Navigation,
   Pagination,
   Scrollbar,
   A11y,
-  Autoplay,
-} from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+  Autoplay
+} from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
-import "swiper/components/pagination/pagination.scss";
-import "swiper/components/scrollbar/scrollbar.scss";
-import "swiper/swiper.scss";
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
-export default () => {
+import 'swiper/swiper.scss'
+import 'swiper/components/navigation/navigation.scss'
+import 'swiper/components/pagination/pagination.scss'
+import 'swiper/components/scrollbar/scrollbar.scss'
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay])
+const Carousel = () => {
   const AutoplayOptions = {
     delay: 2500,
-    disableOnInteraction: false,
-  };
+    disableOnInteraction: false
+  }
   return (
     <>
       <Box pl={30} pr={30}>
@@ -50,5 +51,7 @@ export default () => {
         </Swiper>
       </Box>
     </>
-  );
-};
+  )
+}
+
+export default Carousel

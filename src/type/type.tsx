@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable camelcase */
 export interface User {
     id: number;
     username: string;

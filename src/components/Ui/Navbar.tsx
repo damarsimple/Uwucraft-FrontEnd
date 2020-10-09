@@ -1,145 +1,119 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from 'react'
 import {
   createStyles,
   makeStyles,
   Theme,
-  fade,
-} from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
-import TextField from "@material-ui/core/TextField";
+  fade
+} from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import SearchIcon from '@material-ui/icons/Search'
+import TextField from '@material-ui/core/TextField'
 import {
   Badge,
   Grid,
   List,
   ListItem,
   Box,
-  ListItemIcon,
   ListItemText,
-  ListItemSecondaryAction,
   Typography,
-  ListItemAvatar,
-} from "@material-ui/core";
-import { Link as Go } from "react-router-dom";
-import UserContext from "../../context/UserContext";
-import { GET_SEARCH } from "../../api/graphql";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Tippy from "@tippyjs/react";
-import "tippy.js/themes/translucent.css";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import { useQuery } from "@apollo/client";
-import { Search } from "../../type/type";
-import { getImage, linkTo } from "../../utils/linker";
-import { Item } from "../../type/type";
-import CircularProgress from "@material-ui/core/CircularProgress";
+  ListItemAvatar
+} from '@material-ui/core'
+import { Link as Go } from 'react-router-dom'
+import UserContext from '../../context/UserContext'
+import { GET_SEARCH } from '../../api/graphql'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/themes/translucent.css'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import { useQuery } from '@apollo/client'
+import { Search } from '../../type/type'
+import { getImage, linkTo } from '../../utils/linker'
+import CircularProgress from '@material-ui/core/CircularProgress'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
+      flexGrow: 1
     },
     menuButton: {
-      marginRight: theme.spacing(2),
+      marginRight: theme.spacing(2)
     },
     title: {
-      flexGrow: 1,
+      flexGrow: 1
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "20ch",
-      },
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: '20ch'
+      }
     },
     inputRoot: {
-      color: "inherit",
+      color: 'inherit'
     },
     search: {
-      position: "relative",
+      position: 'relative',
       borderRadius: theme.shape.borderRadius,
       backgroundColor: fade(theme.palette.common.white, 0.15),
-      "&:hover": {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
+      '&:hover': {
+        backgroundColor: fade(theme.palette.common.white, 0.25)
       },
       marginRight: theme.spacing(2),
       marginLeft: 0,
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(3),
-        width: "auto",
-      },
+        width: 'auto'
+      }
     },
     searchIcon: {
       padding: theme.spacing(0, 2),
-      height: "100%",
-      position: "absolute",
-      pointerEvents: "none",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      height: '100%',
+      position: 'absolute',
+      pointerEvents: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     anchor: {
-      color: "white",
-      textDecoration: "none",
-      "&:hover": {
-        color: "black",
-      },
+      color: 'white',
+      textDecoration: 'none',
+      '&:hover': {
+        color: 'black'
+      }
     },
     anchorCart: {
-      color: "black",
-      textDecoration: "none",
-      "&:hover": {
-        color: "grey",
-      },
-    },
+      color: 'black',
+      textDecoration: 'none',
+      '&:hover': {
+        color: 'grey'
+      }
+    }
   })
-);
-const ItemList = (props: { data: { item: Item } }) => {
-  return (
-    <ListItem button>
-      <ListItemIcon>
-        <img
-          width={30}
-          height={30}
-          src={
-            "/api/image/item/" + props?.data?.item?.minecraft_item_shorthand ??
-            "stone"
-          }
-          alt=""
-        />
-      </ListItemIcon>
-      <ListItemText primary={props?.data?.item?.item_name ?? "stone"} />
-      <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete">
-          ${props?.data?.item?.price ?? 0}
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
-  );
-};
-export default function Navbar() {
-  const classes = useStyles();
-  const { session, carts } = useContext(UserContext);
-  const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState<Search[]>([]);
-  const [search, setSearch] = React.useState<String>("");
+)
+export default function Navbar () {
+  const classes = useStyles()
+  const { session, carts } = useContext(UserContext)
+  const [open, setOpen] = React.useState(false)
+  const [options, setOptions] = React.useState<Search[]>([])
+  const [search, setSearch] = React.useState<String>('')
   const { loading, data } = useQuery(GET_SEARCH, {
-    variables: { search: search },
-  });
+    variables: { search: search }
+  })
 
   const handleChange = (e: any) => {
-    setSearch(e.target.value);
-  };
+    setSearch(e.target.value)
+  }
   useEffect(() => {
     if (data && data.search) {
-      setOptions(data.search);
+      setOptions(data.search)
     }
-  }, [data]);
+  }, [data])
 
   return (
     <div className={classes.root}>
@@ -186,10 +160,10 @@ export default function Navbar() {
                 freeSolo
                 open={open}
                 onOpen={() => {
-                  setOpen(true);
+                  setOpen(true)
                 }}
                 onClose={() => {
-                  setOpen(false);
+                  setOpen(false)
                 }}
                 getOptionSelected={(option, value) =>
                   option.name === value.name
@@ -201,7 +175,7 @@ export default function Navbar() {
                   <ListItem
                     button
                     onClick={() => {
-                      window.location.href = linkTo(option.action, option.type);
+                      window.location.href = linkTo(option.action, option.type)
                     }}
                   >
                     <ListItemAvatar>
@@ -209,7 +183,7 @@ export default function Navbar() {
                         width={35}
                         height={35}
                         src={getImage(option.img, option.type)}
-                        alt={"tests"}
+                        alt={'tests'}
                       />
                     </ListItemAvatar>
 
@@ -238,7 +212,7 @@ export default function Navbar() {
 
                           {params.InputProps.endAdornment}
                         </React.Fragment>
-                      ),
+                      )
                     }}
                   />
                 )}
@@ -251,7 +225,7 @@ export default function Navbar() {
                   session.isLogged ? (
                     <>
                       <Tippy
-                        trigger={"mouseenter click"}
+                        trigger={'mouseenter click'}
                         theme="translucent"
                         interactive
                         allowHTML
@@ -263,8 +237,8 @@ export default function Navbar() {
                               width="450px"
                               overflow="scroll"
                               style={{
-                                backgroundColor: "whitesmoke",
-                                color: "black",
+                                backgroundColor: 'whitesmoke',
+                                color: 'black'
                               }}
                             >
                               <AppBar position="static">
@@ -286,11 +260,14 @@ export default function Navbar() {
                                     <Go
                                       key={index}
                                       className={classes.anchorCart}
-                                      to={"/shop/item/" + data?.item_id}
+                                      to={'/shop/item/' + data?.item_id}
                                     >
-                                      {/* <ItemList data={data} /> */}
+                                      {data !== null && data !== undefined
+                                        ? // <ItemList data={data as Usercart} />
+                                        'fix this please'
+                                        : null}
                                     </Go>
-                                  );
+                                  )
                                 })}
                               </List>
                             </Box>
@@ -307,7 +284,7 @@ export default function Navbar() {
                       <Button
                         onClick={() => {
                           // destroySession();
-                          console.log(data);
+                          console.log(data)
                         }}
                         color="inherit"
                       >
@@ -332,5 +309,5 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
     </div>
-  );
+  )
 }

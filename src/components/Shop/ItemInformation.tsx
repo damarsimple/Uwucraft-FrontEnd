@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable no-use-before-define */
+import React, { useState } from 'react'
 import {
   Grid,
   Typography,
@@ -7,30 +8,30 @@ import {
   Box,
   Avatar,
   IconButton,
-  Button,
-} from "@material-ui/core";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Image from "material-ui-image";
-import { Item } from "../../type/type";
-import { useMutation } from "@apollo/client";
-import { ADD_USER_CART } from "../../api/graphql";
+  Button
+} from '@material-ui/core'
+import VisibilityIcon from '@material-ui/icons/Visibility'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import Image from 'material-ui-image'
+import { Item } from '../../type/type'
+import { useMutation } from '@apollo/client'
+import { ADD_USER_CART } from '../../api/graphql'
 
 const ItemInformation = (props: Item) => {
-  const [amount, setAmount] = useState<number>(1);
-  const [addUserCart] = useMutation(ADD_USER_CART);
+  const [amount, setAmount] = useState<number>(1)
+  const [addUserCart] = useMutation(ADD_USER_CART)
   const handleClick = () => {
     addUserCart({
-      variables: { amount: amount !== 0 ? amount : 1, item_id: props.id },
-    });
-  };
+      variables: { amount: amount !== 0 ? amount : 1, item_id: props.id }
+    })
+  }
   // useEffect(() => {
   //   if (refetchCarts) refetchCarts();
   // }, [loading]);
   const handleChange = (event: any) => {
-    setAmount(event.target.value as number);
-  };
+    setAmount(event.target.value as number)
+  }
 
   return (
     <>
@@ -40,9 +41,9 @@ const ItemInformation = (props: Item) => {
             imageStyle={{
               width: 400,
               height: 400,
-              marginTop: "5rem",
+              marginTop: '5rem'
             }}
-            src={"/img/item/" + props.minecraft_item_shorthand + ".png"}
+            src={'/img/item/' + props.minecraft_item_shorthand + '.png'}
           />
         </Grid>
         <Grid item xs={false} sm={8}>
@@ -54,9 +55,9 @@ const ItemInformation = (props: Item) => {
             <Paper
               elevation={1}
               style={{
-                width: "inherit",
-                padding: "1rem",
-                backgroundColor: "#F5FFFA",
+                width: 'inherit',
+                padding: '1rem',
+                backgroundColor: '#F5FFFA'
               }}
             >
               <Typography variant="h6">IDR {props.price}</Typography>
@@ -70,7 +71,7 @@ const ItemInformation = (props: Item) => {
                 label="Number"
                 type="number"
                 InputLabelProps={{
-                  shrink: true,
+                  shrink: true
                 }}
               />
             </Grid>
@@ -145,7 +146,7 @@ const ItemInformation = (props: Item) => {
 
       <hr />
     </>
-  );
-};
+  )
+}
 
-export default ItemInformation;
+export default ItemInformation

@@ -1,4 +1,4 @@
-export function getImage(id: string | number, type: string): string {
+export function getImage(id: string | number | undefined, type: string): string {
   switch (type) {
     case "User":
       return "";

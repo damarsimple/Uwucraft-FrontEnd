@@ -1,34 +1,35 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
+/* eslint-disable no-use-before-define */
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardActionArea from '@material-ui/core/CardActionArea'
 
-import CardContent from "@material-ui/core/CardContent";
+import CardContent from '@material-ui/core/CardContent'
 
-import Typography from "@material-ui/core/Typography";
-import Image from "material-ui-image";
-import { Item } from "../../type/type";
+import Typography from '@material-ui/core/Typography'
+import Image from 'material-ui-image'
+import { Item } from '../../type/type'
 const useStyles = makeStyles({
   media: {
-    height: 200,
+    height: 200
   },
   card: {
     maxHeight: 340,
-    overflow: "hidden",
+    overflow: 'hidden'
   },
   title: {
-    maxHeight: 30,
-  },
-});
+    maxHeight: 30
+  }
+})
 const ItemCard = (props: { item: Item }) => {
-  const classes = useStyles();
-  const item = props.item;
+  const classes = useStyles()
+  const item = props.item
   return (
     <Card className={classes.card}>
       <CardActionArea>
         <Image
           className={classes.media}
-          src={"/img/item/" + item.minecraft_item_shorthand + ".png"}
+          src={'/img/item/' + item.minecraft_item_shorthand + '.png'}
         />
       </CardActionArea>
       <CardContent>
@@ -49,6 +50,6 @@ const ItemCard = (props: { item: Item }) => {
         </Typography>
       </CardContent>
     </Card>
-  );
-};
-export default ItemCard;
+  )
+}
+export default ItemCard

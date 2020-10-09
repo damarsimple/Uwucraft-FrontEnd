@@ -1,5 +1,6 @@
+/* eslint-disable no-use-before-define */
 
-import React, { useContext, useState, Fragment } from "react";
+import React, { useContext, useState, Fragment } from 'react'
 import {
   Typography,
   Divider,
@@ -8,12 +9,12 @@ import {
   Avatar,
   List,
   ListItem,
-  Paper,
-} from "@material-ui/core";
-import EchoContext from "../../context/EchoContext";
-import { User } from "../../type/type";
-import { useQuery } from "@apollo/client";
-import { GET_ACTIVITIES } from "../../api/graphql";
+  Paper
+} from '@material-ui/core'
+import EchoContext from '../../context/EchoContext'
+import { User } from '../../type/type'
+import { useQuery } from '@apollo/client'
+import { GET_ACTIVITIES } from '../../api/graphql'
 interface ActivityData {
   type: String;
   data: any;
@@ -33,39 +34,39 @@ interface ActivityData {
 //     overflowX: "hidden"
 //   }
 // }));
-function Activity() {
-  const { EchoClient } = useContext(EchoContext);
-  const [activities, setActivities] = useState<ActivityData[]>([]);
+function Activity () {
+  const { EchoClient } = useContext(EchoContext)
+  const [activities, setActivities] = useState<ActivityData[]>([])
   const { loading } = useQuery(GET_ACTIVITIES, {
     variables: {
       first: 100,
-      after: null,
+      after: null
     },
     onCompleted: (data) => {
       const transform = data.activities.edges.map((data: { node: any; }) => {
-        return data.node;
-      });
-      setActivities(activities.concat(transform));
-    },
-  });
-  EchoClient.channel("activity").listen("ActivityEvent", (e: ConcatArray<ActivityData>) => {
-    setActivities(activities.concat(e));
-  });
+        return data.node
+      })
+      setActivities(activities.concat(transform))
+    }
+  })
+  EchoClient.channel('activity').listen('ActivityEvent', (e: ConcatArray<ActivityData>) => {
+    setActivities(activities.concat(e))
+  })
 
   const returnDom = (props: ActivityData) => {
-    let value;
+    let value
     switch (props.type) {
-      case "User":
-        value = JSON.parse(props.data) as User;
-        return ActivityUser(value);
+      case 'User':
+        value = JSON.parse(props.data) as User
+        return ActivityUser(value)
       default:
-        value = JSON.parse(props.data) as User;
-        return ActivityUser(value);
+        value = JSON.parse(props.data) as User
+        return ActivityUser(value)
     }
-  };
+  }
 
   if (loading) {
-    return <h1>Tests</h1>;
+    return <h1>Tests</h1>
   }
 
   return (
@@ -80,11 +81,11 @@ function Activity() {
             <Fragment key={index}>
               <Paper elevation={2}>{returnDom(data)}</Paper>
             </Fragment>
-          );
+          )
         })}
       </List>
     </>
-  );
+  )
 }
 
 const ActivityUser = (props: User) => {
@@ -103,6 +104,6 @@ const ActivityUser = (props: User) => {
         </Grid>
       </Grid>
     </ListItem>
-  );
-};
-export default Activity;
+  )
+}
+export default Activity

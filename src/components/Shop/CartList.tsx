@@ -14,6 +14,7 @@ import Image from "material-ui-image";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import UserContext from "../../context/UserContext";
+import { getImage } from "../../utils/linker";
 const useStyles = makeStyles(() =>
   createStyles({
     imgContainer: {
@@ -41,9 +42,7 @@ const CartList = () => {
               <Box p={1}>
                 <Image
                   className={classes.imgContainer}
-                  src={
-                    "/api/image/item/" + item?.item?.minecraft_item_shorthand
-                  }
+                  src={getImage(item?.item?.minecraft_item_shorthand, "Item")}
                 />
               </Box>
             </Grid>

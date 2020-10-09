@@ -1,20 +1,21 @@
-import React from "react";
-import { Grid, Typography } from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
-import Reviewcard from "./ReviewCard";
-import { Review } from "../../type/type";
+/* eslint-disable no-use-before-define */
+import React from 'react'
+import { Grid, Typography } from '@material-ui/core'
+import Rating from '@material-ui/lab/Rating'
+import Reviewcard from './ReviewCard'
+import { Review } from '../../type/type'
 const ItemReview = (props: { data?: Array<Review> }) => {
   // IS this too complicated?
-  let average = (array: number[]) =>
-    array.reduce((a, b) => a + b) / array.length;
-  const data = props.data ?? [];
-  let arr: number[] = [];
-  let i = 0;
+  const average = (array: number[]) =>
+    array.reduce((a, b) => a + b) / array.length
+  const data = props.data ?? []
+  const arr: number[] = []
+  let i = 0
   while (i < data.length) {
-    arr.push(data[i].score);
-    i++;
+    arr.push(data[i].score)
+    i++
   }
-  const AvgStar = arr.length !== 0 ? average(arr) : 0;
+  const AvgStar = arr.length !== 0 ? average(arr) : 0
   return (
     <Grid container>
       <Grid item xs={4} sm={4}>
@@ -29,10 +30,10 @@ const ItemReview = (props: { data?: Array<Review> }) => {
       </Grid>
       <Grid item xs={8} sm={8}>
         {props.data?.map((review, index) => {
-          return <Reviewcard key={index} {...review} />;
+          return <Reviewcard key={index} {...review} />
         })}
       </Grid>
     </Grid>
-  );
-};
-export default ItemReview;
+  )
+}
+export default ItemReview

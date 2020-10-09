@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import {
   Container,
   createStyles,
@@ -8,42 +9,42 @@ import {
   Box,
   Paper,
   Divider,
-  Button,
-} from "@material-ui/core";
-import React, { useContext, useEffect, useState } from "react";
-import UserContext from "../../context/UserContext";
-import CartList from "./CartList";
-import { meCart } from "../../api/graphql";
-import { Link } from "react-router-dom";
-import { Item } from "../../type/type";
+  Button
+} from '@material-ui/core'
+import React, { useContext, useEffect, useState } from 'react'
+import UserContext from '../../context/UserContext'
+import CartList from './CartList'
+import { meCart } from '../../api/graphql'
+import { Link } from 'react-router-dom'
+import { Item } from '../../type/type'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: { margin: "2rem", padding: "2rem" },
+    container: { margin: '2rem', padding: '2rem' },
     cartReviewContainer: {
-      position: "fixed",
-      width: 376,
-    },
+      position: 'fixed',
+      width: 376
+    }
   })
-);
+)
 
 const Cart = () => {
-  const { setCarts } = useContext(UserContext);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-  const classes = useStyles();
+  const { setCarts } = useContext(UserContext)
+  const [totalPrice, setTotalPrice] = useState<number>(0)
+  const classes = useStyles()
   useEffect(() => {
     const setCartsData = async () => {
-      const data = await meCart(true);
-      if (localStorage.getItem("token")) {
-        if (setCarts !== undefined) setCarts(data.data.me.usercart);
-        let totalPrice = 0;
+      const data = await meCart(true)
+      if (localStorage.getItem('token')) {
+        if (setCarts !== undefined) setCarts(data.data.me.usercart)
+        let totalPrice = 0
         data.data.me.usercart.forEach((element: { item: Item }) => {
-          totalPrice = totalPrice + element.item.price;
-        });
-        setTotalPrice(totalPrice);
+          totalPrice = totalPrice + element.item.price
+        })
+        setTotalPrice(totalPrice)
       }
-    };
-    setCartsData();
-  });
+    }
+    setCartsData()
+  })
   return (
     <Container maxWidth="lg">
       <Paper elevation={0} className={classes.container}>
@@ -87,7 +88,7 @@ const Cart = () => {
         </Grid>
       </Paper>
     </Container>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart

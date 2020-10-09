@@ -1,79 +1,81 @@
-import React, { useState, useContext, useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { Link } from "react-router-dom";
-import Alert from "@material-ui/lab/Alert";
-import { login } from "../api/graphql";
-import { Collapse } from "@material-ui/core";
-import UserContext from "../context/UserContext";
+// eslint-disable-next-line no-use-before-define
+import React, { useState, useContext, useEffect } from 'react'
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import TextField from '@material-ui/core/TextField'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
+import Grid from '@material-ui/core/Grid'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
+import { Link } from 'react-router-dom'
+import Alert from '@material-ui/lab/Alert'
+import { login } from '../api/graphql'
+import { Collapse } from '@material-ui/core'
+import UserContext from '../context/UserContext'
 const useStyles = makeStyles((theme) => ({
   container: {
-    minHeight: "85vh",
+    minHeight: '85vh'
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+    margin: theme.spacing(3, 0, 2)
+  }
+}))
 
-export default function Login() {
-  const { setSession } = useContext(UserContext);
-  const classes = useStyles();
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [status, setStatus] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>("");
+export default function Login () {
+  const { setSession } = useContext(UserContext)
+  const classes = useStyles()
+  const [username, setUsername] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [status, setStatus] = useState<boolean>(false)
+  const [message, setMessage] = useState<string>('')
   const handleClick = () => {
     login({ username: username, password: password })
       .then((r) => {
         if (r.data.login.success) {
-          if (setSession !== undefined)
+          if (setSession !== undefined) {
             setSession({
               isLogged: true,
-              session: r.data.login.user,
-            });
-          localStorage.removeItem("token");
-          localStorage.setItem("token", r.data.login.token);
-          window.location.replace("/home");
+              session: r.data.login.user
+            })
+          }
+          localStorage.removeItem('token')
+          localStorage.setItem('token', r.data.login.token)
+          window.location.replace('/home')
         } else {
-          setMessage(r.data.login.exception);
-          setStatus(true);
+          setMessage(r.data.login.exception)
+          setStatus(true)
         }
       })
       .catch(() => {
-        setMessage("Server Error");
-        setStatus(true);
-      });
-  };
+        setMessage('Server Error')
+        setStatus(true)
+      })
+  }
   useEffect(() => {
     if (status) {
       setTimeout(() => {
-        setStatus(!status);
-      }, 5000);
+        setStatus(!status)
+      }, 5000)
     }
-  }, [status]);
+  }, [status])
   return (
     <Grid
       container
@@ -109,7 +111,7 @@ export default function Login() {
               autoFocus
               value={username}
               onChange={(event) => {
-                setUsername(event.target.value);
+                setUsername(event.target.value)
               }}
             />
             <TextField
@@ -122,7 +124,7 @@ export default function Login() {
               autoComplete="current-password"
               value={password}
               onChange={(event) => {
-                setPassword(event.target.value);
+                setPassword(event.target.value)
               }}
             />
             <FormControlLabel
@@ -150,5 +152,5 @@ export default function Login() {
         </Container>
       </Grid>
     </Grid>
-  );
+  )
 }

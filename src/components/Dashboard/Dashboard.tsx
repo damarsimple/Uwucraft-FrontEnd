@@ -1,31 +1,32 @@
-import React from "react";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import LatestTransaction from "./LatestTransaction";
-import Activity from "./Activity";
-import SystemActivity from "./SystemActivity";
-import Chart from "./Chart";
+/* eslint-disable no-use-before-define */
+import React from 'react'
+import clsx from 'clsx'
+import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import LatestTransaction from './LatestTransaction'
+import Activity from './Activity'
+import SystemActivity from './SystemActivity'
+import Chart from './Chart'
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: "1rem"
+    padding: '1rem'
   },
   paper: {
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column'
   },
   fixedHeight: {
     height: 480,
-    overflow: "scroll",
-    overflowX: "hidden"
+    overflow: 'scroll',
+    overflowX: 'hidden'
   }
-}));
+}))
 
-export default function Dashboard() {
-  const classes = useStyles();
+export default function Dashboard () {
+  const classes = useStyles()
 
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
   return (
     <Grid container spacing={3} className={classes.root}>
       <Grid item xs={6}>
@@ -49,5 +50,5 @@ export default function Dashboard() {
         </Paper>
       </Grid>
     </Grid>
-  );
+  )
 }
